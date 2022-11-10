@@ -127,3 +127,32 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored name
+  # puts game_hash[:home][:players].include?{|obj|obj[:player_name]==name}
+  game_hash[:home][:players].find{|obj|obj[:player_name]==name} == nil ? game_hash[:away][:players].find{|obj|obj[:player_name]==name}[:points] : game_hash[:home][:players].find{|obj|obj[:player_name]==name}[:points] 
+end
+
+def shoe_size name
+  # puts game_hash[:home][:players].include?{|obj|obj[:player_name]==name}
+  game_hash[:home][:players].find{|obj|obj[:player_name]==name} == nil ? game_hash[:away][:players].find{|obj|obj[:player_name]==name}[:shoe] : game_hash[:home][:players].find{|obj|obj[:player_name]==name}[:shoe] 
+end
+
+def team_colors team_name
+  game_hash[:home][:team_name] == team_name ? game_hash[:home][:colors] : game_hash[:away][:colors]
+end
+
+def team_names
+  [game_hash[:home][:team_name],game_hash[:away][:team_name]]
+end
+
+def player_numbers team_name
+  game_hash[:home][:team_name] == team_name ? game_hash[:home][:players].map{|obj|obj[:number]} : game_hash[:away][:players].map{|obj|obj[:number]}
+end
+
+def player_stats name
+  game_hash[:home][:players].find{|obj|obj[:player_name]==name} == nil ? game_hash[:away][:players].find{|obj|obj[:player_name]==name} : game_hash[:home][:players].find{|obj|obj[:player_name]==name}
+end
+
+def big_shoe_rebounds
+ game_hash[:home][:players].concat(game_hash[:away][:players]).max_by{|obj|obj[:shoe]}[:rebounds]
+end
